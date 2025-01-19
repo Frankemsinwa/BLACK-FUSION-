@@ -194,26 +194,25 @@
                                     <p>On submiting the form our executive will contact you and discuss details of the project.</p>
                                 </div>
                                 <div class="consultation-form__form">
-                                    <form name="submit-to-google-sheet1" onsubmit="successSubmit();return false;">
-                                        <div class="box-fileds">
-                                            <div class="box-filed">
-                                                <input type="text" placeholder="First name" name="fname" required >
-                                            </div>
-                                            <div class="box-filed">
-                                                <input type="text" placeholder="Second name" name="lname">
-                                            </div>
-                                            <div class="box-filed">
-                                                <input type="tel" placeholder="Enter your phone" name="phone" maxlength="11" required >
-                                            </div>
-                                            <div class="box-filed">
-                                                <input type="email" placeholder="Enter your email" name="email">
-                                            </div>
-                                            <div class="box-filed box-filed_btn">
-                                                <input type="submit" class="btn" value="Submit">
-                                            </div>
-                                            
-                                        </div>
-                                    </form>
+                                    <form name="submit-to-google-sheet1" id="google-form">
+  <div class="box-fields">
+    <div class="box-field">
+      <input type="text" placeholder="First name" name="fname" required>
+    </div>
+    <div class="box-field">
+      <input type="text" placeholder="Second name" name="lname">
+    </div>
+    <div class="box-field">
+      <input type="tel" placeholder="Enter your phone" name="phone" maxlength="11" required>
+    </div>
+    <div class="box-field">
+      <input type="email" placeholder="Enter your email" name="email">
+    </div>
+    <div class="box-field box-field_btn">
+      <input type="submit" class="btn" value="Submit">
+    </div>
+  </div>
+</form>
                                 </div>
                             </div>
                             <div class="consultation-img">
@@ -523,16 +522,25 @@
                 </div>
             </div>
         </div>
-        <script>
-            const scriptURL1 = 'https://script.google.com/macros/s/AKfycbyuWCl8BXuu2pwKGkttsowhd6FPZ-VCMG_g7yagGDu-Xxs1HQNI-2zB7G4iP-7DL9IMWg/exec'
-            const form1 = document.forms['submit-to-google-sheet1']
-            form1.addEventListener('submit', e => {
-              e.preventDefault()
-              fetch(scriptURL1, { method: 'POST', body: new FormData(form1) })
-                .then(response => document.location.href = '/')
-                .catch(error => console.error('Error!', error.message))
-            })
-          </script>
+       <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwdU6uJzESe_6cH2dlRJZxq3PEP9dH0MHw4CrIWM2291jAOKyvFH80ckgbEOkNdoWGF/exec';
+  const form = document.getElementById('google-form');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const formData = new FormData(form);
+
+    fetch(scriptURL, { method: 'POST', body: formData })
+      .then(response => {
+        alert('Form submitted successfully!');
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Error!', error.message);
+        alert('Failed to submit the form. Please try again.');
+      });
+  });
+</script>
         <script>
             const scriptURL = 'https://script.google.com/macros/s/AKfycbx5o6htjEPoyyz3TNYailPmxYJikyVSW4-0nGSkXTaOSoWPu32OJiTSXYyGbScBqQLaqA/exec'
             const form = document.forms['submit-to-google-sheet']
