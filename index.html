@@ -523,34 +523,40 @@
             </div>
         </div>
        <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbwdU6uJzESe_6cH2dlRJZxq3PEP9dH0MHw4CrIWM2291jAOKyvFH80ckgbEOkNdoWGF/exec';
-  const form = document.forms['submit-to-google-sheet1']
+ function sendToWhatsApp(event) {
+    event.preventDefault();  // Prevent form from submitting normally
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const formData = new FormData(form);
+    // Get form data
+    var name = document.getElementById('fname').value;
+    var email = document.getElementById('lname').value;
+    var message = document.getElementById('phone').value;
+    var message = document.getElementById('email').value;
+    // Debugging: Check if values are captured correctly
+    console.log("First Name: " + fname);
+    console.log("Last Name: " + lname);
+    console.log("Phone Number: " + phone);
+    console.log("Email : " + email);
 
-    fetch(scriptURL, { method: 'POST', body: formData })
-      .then(response => {
-        alert('Form submitted successfully!');
-        form.reset();
-      })
-      .catch(error => {
-        console.error('Error!', error.message);
-        alert('Failed to submit the form. Please try again.');
-      });
-  });
+    // Ensure all fields have values
+    if (!fname  !lname  !phone !email) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    // Format the message to send to WhatsApp
+    var messageText = *New Customer Message*\n\nFirst-Name: ${fname}\nLast-Name: ${lname}\nNumber: ${phone}\nEmail: ${email};
+
+    // WhatsApp link format (replace '(your number)' with your actual WhatsApp number)
+    var whatsappLink = https://wa.me/234(7064890703)?text=${encodeURIComponent(messageText)};
+
+    // Debugging: Check the WhatsApp link before redirecting
+    console.log("WhatsApp Link: " + whatsappLink);
+
+    // Redirect to WhatsApp
+    window.location.href = whatsappLink;
+}
 </script>
-        <script>
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbx5o6htjEPoyyz3TNYailPmxYJikyVSW4-0nGSkXTaOSoWPu32OJiTSXYyGbScBqQLaqA/exec'
-            const form = document.forms['submit-to-google-sheet']
-            form.addEventListener('submit', e => {
-              e.preventDefault()
-              fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                .then(response => document.location.href = '/')
-                .catch(error => console.error('Error!', error.message))
-            })
-          </script>
+      
           
         <script>
             var body = document.body;
